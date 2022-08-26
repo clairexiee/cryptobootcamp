@@ -1,9 +1,9 @@
 import "dotenv/config";
 import Web3 from "web3";
-import type { AbiItem } from "web3-utils";
 import type { Log } from "web3-core";
 
 import storefrontAbi from "../lib/storefront-abi.json";
+import getStorefrontContract from "../lib/get-storefront-contract";
 
 // define the structure for the purchase receipt data we want to know about
 type PurchaseReceipt = {
@@ -18,11 +18,6 @@ type PurchaseReceipt = {
 const STOREFRONT_PURCHASES: Record<string, PurchaseReceipt> = {};
 
 // make sure that we have our environment setup correctly
-if (!process.env.STOREFRONT_ADDRESS) {
-  throw new Error(
-    "No STOREFRONT_ADDRESS configured. Please setup a .env file with that variable"
-  );
-}
 if (!process.env.WEB3_URI) {
   throw new Error(
     "No WEB3_URI configured. Please setup a .env file with that variable"
@@ -35,10 +30,7 @@ const ITEM_PURCHASED_ABI_INPUT =
 
 // define some globals for our web3 and storefront instantiations
 const web3 = new Web3(process.env.WEB3_URI);
-const storefront = new web3.eth.Contract(
-  storefrontAbi as AbiItem[],
-  process.env.STOREFRONT_ADDRESS
-);
+const storefront = getStorefrontContract(web3);
 
 // define our base search parameters for finding purchases on-chain
 const PURCHASE_FILTER = {
