@@ -4,8 +4,7 @@ pragma solidity ^0.8.9;
 // The Storefront Contract
 contract Storefront {
     // define some state values to track our prices and stock
-    // @NOTE: we'll track our prices in hundredths of Ether to avoid dealing with floats
-    //        (e.g. like tracking cents vs dollars)
+    // @NOTE: we'll track our prices in wei to avoid dealing with floats
     mapping(string => uint256) public prices;
     mapping(string => uint256) public stock;
 

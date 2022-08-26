@@ -4,12 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "hardhat test"
+    "server": "nodemon server/index.ts",
+    "test": "hardhat test",
+    "ui": "parcel dev"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^1.0.2",
-    "hardhat": "^2.10.2"
+    "hardhat": "^2.10.2",
+    "nodemon": "^2.0.19",
+    "parcel": "^2.7.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "web3": "^1.7.5"
   }
 }
